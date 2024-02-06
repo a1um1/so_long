@@ -1,109 +1,11 @@
-#include "../lib/mlx/mlx.h"
+#include "so_long.h"
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 
-#define WIDTH 18
-#define HEIGHT 10
-#define TILE_SIZE 32
-
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
-
-typedef struct {
-	unsigned char B, G, R, A;
-}RGB;
-typedef union{
-	RGB rgb;
-		unsigned int value;
-		unsigned int array[4];
-}Color;
-
-enum {
-	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
-	ON_EXPOSE = 12,
-	ON_DESTROY = 17
-};
-
-
-typedef struct s_chatacter {
-	int		x;
-	int		y;
-} t_character;
-typedef struct	s_vars {
-	void	*mlx;
-	void	*win;
-	t_character chac;
-	int		**maps;
-	int		max_x;
-	int		max_y;
-}				t_vars;
-
-void draw_wall(t_vars *vars)
+void draw_tileat(t_vars *vars, t_tile tile, int x, int y)
 {
 	if (vars == NULL)
 		return;
-	int tileX = 0;
-	int tileY = 0;
-	t_data	img2;
-	char	*relative_path = "./wall2.xpm";
-	int		img_width;
-	int		img_height;
-	img2.img = mlx_xpm_file_to_image(vars->mlx, relative_path, &img_width, &img_height);
-	while (tileX < (vars->max_x * TILE_SIZE - 1)) {
-		mlx_put_image_to_window(vars->mlx, vars->win, img2.img, tileX, 0);
-		mlx_put_image_to_window(vars->mlx, vars->win, img2.img, tileX, (vars->max_y * TILE_SIZE)- img_height);
-		tileX+=img_width;
-	}
-
-	while (tileY <( vars->max_y * TILE_SIZE - 1)) {
-		mlx_put_image_to_window(vars->mlx, vars->win, img2.img, 0, tileY);
-		mlx_put_image_to_window(vars->mlx, vars->win, img2.img, (vars->max_x * TILE_SIZE)-img_width, tileY);
-		tileY+=img_height;
-	}
-}
-
-void draw_background(t_vars *vars)
-{
-	if (vars == NULL)
-		return;
-	int tileX = 0;
-	int tileY = 0;
-	t_data	img2;
-	char	*relative_path = "./bg2.xpm";
-	int		img_width;
-	int		img_height;
-	img2.img = mlx_xpm_file_to_image(vars->mlx, relative_path, &img_width, &img_height);
-	while (tileX < vars->max_x * TILE_SIZE) {
-		tileY = 0;
-		while (tileY < vars->max_y * TILE_SIZE) {
-			mlx_put_image_to_window(vars->mlx, vars->win, img2.img, tileX, tileY);
-			tileY+=img_height;
-		}
-		tileX+=img_width;
-	}
-}
-
-void draw_Character(t_vars *vars)
-{
-	if (vars == NULL)
-		return;
-	t_data	img2;
-	char	*relative_path = "./chac_1.xpm";
-	int		img_width;
-	int		img_height;
-	img2.img = mlx_xpm_file_to_image(vars->mlx, relative_path, &img_width, &img_height);
-	mlx_put_image_to_window(vars->mlx, vars->win, img2.img, vars->chac.x * TILE_SIZE, vars->chac.y * TILE_SIZE);
-
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->tile[tile].img, x * vars->tile[tile].width, y * vars->tile[tile].height);
 }
 
 int exitApp(t_vars *vars)
@@ -115,88 +17,113 @@ int exitApp(t_vars *vars)
 	return (0);
 }
 
-int	keyhandle(int keycode, t_vars *vars)
+int movement(t_vars *vars, t_keycode keypress)
 {
-
+	int curX = vars->chac.x;
+	int curY = vars->chac.y;
 	if (vars == NULL)
 		return (0);
-	if (keycode == 53)
-		exitApp(vars);
-	/* RIGHT */
-	if (keycode == 124)
+	if (keypress == KEY_D)
 	{
-		if (vars->chac.x == vars->max_x - 1)
+		if (vars->maps[vars->chac.y][vars->chac.x + 1] == WALL)
 			return (0);
 		vars->chac.x++;
-		draw_background(vars);
-		draw_wall(vars);
-		draw_Character(vars);
 	}
-	/* LEFT */
-	if (keycode == 123)
+	if (keypress == KEY_A)
 	{
-		if (vars->chac.x < 1)
+		if (vars->maps[vars->chac.y][vars->chac.x - 1] == WALL)
 			return (0);
 		vars->chac.x--;
-		draw_background(vars);
-		draw_wall(vars);
-		draw_Character(vars);
 	}
-	/* TOP */
-	if (keycode == 126)
+	if (keypress == KEY_W)
 	{
-		if (vars->chac.y < 1)
+		if (vars->maps[vars->chac.y - 1][vars->chac.x] == WALL)
 			return (0);
 		vars->chac.y--;
-		draw_background(vars);
-		draw_wall(vars);
-		draw_Character(vars);
 	}
-	/* DOWN */
-	if (keycode == 125)
+	if (keypress == KEY_S)
 	{
-		if (vars->chac.y ==  vars->max_y - 1)
+		if (vars->maps[vars->chac.y + 1][vars->chac.x] == WALL)
 			return (0);
 		vars->chac.y++;
-		draw_background(vars);
-		draw_wall(vars);
-		draw_Character(vars);
 	}
+	vars->moves++;
+	draw_tileat(vars, EMPTY, curX, curY);
+	if (vars->maps[vars->chac.y][vars->chac.x] == COLLECTIBLE)
+	{
+		vars->collectible++;
+		vars->maps[vars->chac.y][vars->chac.x] = EMPTY;
+		printf("COLLECTED %d/%d\n", vars->collectible, vars->max_collectible);
+	}
+	if (vars->maps[vars->chac.y][vars->chac.x] == EXIT && vars->collectible >= vars->max_collectible)
+	{
+		exitApp(vars);
+	} else if (vars->maps[vars->chac.y][vars->chac.x] == EXIT)
+		draw_tileat(vars, EXIT, vars->chac.x, vars->chac.y);
+	if (vars->maps[curY][curX] == EXIT)
+		draw_tileat(vars, EXIT, curX, curY);
+	draw_tileat(vars, PLAYER, vars->chac.x, vars->chac.y);
+	return 1;
+}
+
+int	keyhandle(int keycode, t_vars *vars)
+{
+	if (vars == NULL)
+		return (0);
+	if ((keycode == KEY_W || keycode == KEY_A || keycode == KEY_S || keycode == KEY_D))
+		if (movement(vars, keycode))
+			return (0);
+	if (keycode == KEY_ESC)
+		exitApp(vars);
 	return (0);
 }
 
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, Color color)
+void	draw_map(t_vars *vars)
 {
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color.value;
-}
-
-void	my_mlx_put_image(t_data *data, int x, int y, Color color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color.value;
+	int x = 0;
+	int y = 0;
+	while (y < vars->max_y)
+	{
+		x = 0;
+		while (x < vars->max_x)
+		{
+			if (vars->maps[y][x] == WALL)
+				draw_tileat(vars, WALL, x, y);
+			else
+				draw_tileat(vars, EMPTY, x, y);
+			if (vars->maps[y][x] == PLAYER)
+			{
+				vars->chac.x = x;
+				vars->chac.y = y;
+			}
+			else if (vars->maps[y][x] == EXIT)
+				draw_tileat(vars, EXIT, x, y);
+			else if (vars->maps[y][x] == COLLECTIBLE)
+				draw_tileat(vars, COLLECTIBLE, x, y);
+			x++;
+		}
+		y++;
+	}
 }
 
 int	main(void)
 {
 	t_vars	vars;
-	vars.chac.x = 1;
-	vars.chac.y = 1;
-	/* vars.maps[0] = (int[]){1, 1, 1, 1, 1, 1, 1};
-	vars.maps[1] = (int[]){1, 0, 0, 0, 0, 0, 1};
-	vars.maps[2] = (int[]){1, 1, 1, 1, 1, 1, 1}; */
-	vars.max_x = 20;
-	vars.max_y = 20;
+	vars.max_x = 0;
+	vars.max_y = 0;
+	vars.max_collectible = 0;
+	vars.collectible = 0;
+	vars.moves = 0;
+	load_map(&vars, "map/42.ber");
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, vars.max_x * TILE_SIZE, vars.max_y * TILE_SIZE, "so_long");
-	draw_background(&vars);
-	draw_wall(&vars);
-	draw_Character(&vars);
+	vars.tile[EMPTY].img = mlx_xpm_file_to_image(vars.mlx, "assets/bg.xpm", &(vars.tile[EMPTY].width), &(vars.tile[EMPTY].height));
+	vars.tile[WALL].img = mlx_xpm_file_to_image(vars.mlx, "assets/wall.xpm", &(vars.tile[WALL].width), &(vars.tile[WALL].height));
+	vars.tile[PLAYER].img = mlx_xpm_file_to_image(vars.mlx, "assets/player.xpm", &(vars.tile[PLAYER].width), &(vars.tile[PLAYER].height));
+	vars.tile[EXIT].img = mlx_xpm_file_to_image(vars.mlx, "assets/exit.xpm", &(vars.tile[EXIT].width), &(vars.tile[EXIT].height));
+ 	vars.tile[COLLECTIBLE].img = mlx_xpm_file_to_image(vars.mlx, "assets/collectable.xpm", &(vars.tile[COLLECTIBLE].width), &(vars.tile[COLLECTIBLE].height));
+	draw_map(&vars);
+	draw_tileat(&vars, PLAYER, vars.chac.x, vars.chac.y);
 	mlx_hook(vars.win, 2, 1L<<0, keyhandle, &vars);
 	mlx_hook(vars.win, 17, 0L, exitApp, &vars);
 	mlx_loop(vars.mlx);
