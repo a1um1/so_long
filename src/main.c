@@ -114,7 +114,7 @@ int	main(void)
 	vars.max_collectible = 0;
 	vars.collectible = 0;
 	vars.moves = 0;
-	load_map(&vars, "map/42.ber");
+	load_map(&vars, "map/bigger.ber");
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, vars.max_x * TILE_SIZE, vars.max_y * TILE_SIZE, "so_long");
 	vars.tile[EMPTY].img = mlx_xpm_file_to_image(vars.mlx, "assets/bg.xpm", &(vars.tile[EMPTY].width), &(vars.tile[EMPTY].height));
