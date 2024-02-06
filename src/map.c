@@ -4,6 +4,8 @@
 
 char load_map(t_vars *vars, char *map_file)
 {
+    char is_player_exist = 0;
+    char is_exit_exist = 0;
     if (vars == NULL || map_file == NULL)
         return 1;
     vars->maps = malloc(sizeof(int *) * 1);
@@ -12,6 +14,8 @@ char load_map(t_vars *vars, char *map_file)
     vars->maps[0] = NULL;
     int fd = open(map_file, O_RDONLY);
     char *line = get_next_line(fd);
+    if (line == NULL)
+        return 1;
     while (line != NULL)
     {
         int i = 0;
@@ -30,9 +34,19 @@ char load_map(t_vars *vars, char *map_file)
             if (line[i] == '1')
                 p[i] = WALL;
             else if (line[i] == 'E')
+            {
                 p[i] = EXIT;
+                if (is_exit_exist)
+                    return 1;
+                is_exit_exist = 1;
+            }
             else if (line[i] == 'P')
+            {
                 p[i] = PLAYER;
+                if (is_player_exist)
+                    return 1;
+                is_player_exist = 1;
+            }
             else if (line[i] == 'C')
             {
                 p[i] = COLLECTIBLE;
@@ -50,6 +64,8 @@ char load_map(t_vars *vars, char *map_file)
         vars->maps[vars->max_y - 1] = p;
         line = get_next_line(fd);
     }
+    if (vars->max_collectible == 0 || !is_player_exist || !is_exit_exist)
+        return 1;
     vars->maps[vars->max_y] = NULL;
     return 0;
 }

@@ -1,0 +1,31 @@
+{
+	"highlight.regexes": {
+		"(1)": {
+			"regexFlags": "gi",
+			"filterFileRegex": ".*\\.ber",
+			"decorations": [{ "color": "yellow", "backgroundColor": "yellow" }]
+		},
+		"(c)": {
+			"regexFlags": "gi",
+			"filterFileRegex": ".*\\.ber",
+			"decorations": [{ "color": "#32edaf", "backgroundColor": "#32edaf" }]
+		},
+		"(p)": {
+			"regexFlags": "gi",
+			"filterFileRegex": ".*\\.ber",
+			"decorations": [{ "color": "#3a2fd6", "backgroundColor": "#3a2fd6" }]
+		},
+		"(e)": {
+			"regexFlags": "gi",
+			"filterFileRegex": ".*\\.ber",
+			"decorations": [{ "color": "red", "backgroundColor": "red" }]
+		}
+	},
+	"files.associations": {
+		"*.ber": "markdown"
+	},
+	"[markdown]": {
+		"editor.lineHeight": 0,
+		
+	}
+}

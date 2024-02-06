@@ -106,7 +106,7 @@ void	draw_map(t_vars *vars)
 	}
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_vars	vars;
 	vars.max_x = 0;
@@ -114,7 +114,11 @@ int	main(void)
 	vars.max_collectible = 0;
 	vars.collectible = 0;
 	vars.moves = 0;
-	load_map(&vars, "map/bigger.ber");
+	if (load_map(&vars,argv[1]))
+	{
+		printf("Error\n");
+		return (1);
+	}
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, vars.max_x * TILE_SIZE, vars.max_y * TILE_SIZE, "so_long");
 	vars.tile[EMPTY].img = mlx_xpm_file_to_image(vars.mlx, "assets/bg.xpm", &(vars.tile[EMPTY].width), &(vars.tile[EMPTY].height));
