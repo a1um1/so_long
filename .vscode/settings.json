@@ -24,8 +24,8 @@
 	"files.associations": {
 		"*.ber": "markdown"
 	},
+	"codam-norminette-3.command": "python3 -m norminette",
 	"[markdown]": {
-		"editor.lineHeight": 0,
-		
-	}
+		"editor.lineHeight": 0
+	},
 }
