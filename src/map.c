@@ -6,7 +6,7 @@
 /*   By: ml <ml@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 21:14:33 by ml                #+#    #+#             */
-/*   Updated: 2024/02/12 00:53:46 by ml               ###   ########.fr       */
+/*   Updated: 2024/02/12 01:51:53 by ml               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	load_map(t_vars *va, t_maploader *map, char *map_file)
 	}
 	if (check_map(va, map->player_c, map->exit_c) == 1)
 		return (free_map(va, map->fd));
-	if (check_map_accessibility(va) == 0)
+	if (map_check_accessibility(va) == 0 || map_check_closed(va))
 		return (free_map(va, map->fd));
 	close(map->fd);
 	return (0);

@@ -1,5 +1,6 @@
-/*.dSYM
-/*.a
-/*.o
-/*.tgz
+*.dSYM
+*.a
+*.o
+*.tgz
 so_long
+*.o

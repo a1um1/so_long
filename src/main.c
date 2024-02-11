@@ -6,13 +6,13 @@
 /*   By: ml <ml@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 21:13:24 by ml                #+#    #+#             */
-/*   Updated: 2024/02/12 00:31:43 by ml               ###   ########.fr       */
+/*   Updated: 2024/02/12 01:36:08 by ml               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	keyhandle(int keycode, t_vars *vars)
+int	key_handle(int keycode, t_vars *vars)
 {
 	if (vars == NULL)
 		return (0);
@@ -65,7 +65,7 @@ int	main(int argc, char **argv)
 			vars.max_y * TILE_SIZE, "so_long");
 	init_tile(&vars);
 	draw_map(&vars, 0, 0);
-	mlx_hook(vars.win, 2, 1L << 0, keyhandle, &vars);
+	mlx_hook(vars.win, 2, 1L << 0, key_handle, &vars);
 	mlx_hook(vars.win, 17, 0L, exit_app, &vars);
 	mlx_loop(vars.mlx);
 	return (0);

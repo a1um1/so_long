@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_utils.c                                        :+:      :+:    :+:   */
+/*   map_wall_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ml <ml@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 00:00:50 by ml                #+#    #+#             */
-/*   Updated: 2024/02/12 01:44:40 by ml               ###   ########.fr       */
+/*   Created: 2024/02/12 01:21:43 by ml                #+#    #+#             */
+/*   Updated: 2024/02/12 01:35:26 by ml               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-unsigned char	map_add_player(t_vars *vars, char *player_c, unsigned int x)
+unsigned char	map_check_closed(t_vars *vars)
 {
-	vars->maps[vars->max_y][x] = PLAYER;
-	vars->chac_pos[0] = x;
-	vars->chac_pos[1] = vars->max_y;
-	if (*player_c)
-		return (1);
-	*player_c = 1;
-	return (0);
-}
+	unsigned int	i;
+	unsigned int	j;
 
-unsigned char	map_add_exit(t_vars *vars, char *exit_c, unsigned int x)
-{
-	vars->maps[vars->max_y][x] = EXIT;
-	if (*exit_c)
+	if (vars->max_x < 3 || vars->max_y < 3)
 		return (1);
-	*exit_c = 1;
+	i = 0;
+	while (i < vars->max_y)
+	{
+		if (vars->maps[i][0] != WALL || vars->maps[i][vars->max_x - 1] != WALL)
+			return (1);
+		i++;
+	}
+	j = 0;
+	while (j < vars->max_x)
+	{
+		if (vars->maps[0][j] != WALL || vars->maps[vars->max_y - 1][j] != WALL)
+			return (1);
+		j++;
+	}
 	return (0);
 }

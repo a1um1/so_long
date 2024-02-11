@@ -6,7 +6,7 @@
 /*   By: ml <ml@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 21:13:33 by ml                #+#    #+#             */
-/*   Updated: 2024/02/12 00:35:06 by ml               ###   ########.fr       */
+/*   Updated: 2024/02/12 02:01:12 by ml               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ int	exit_app(t_vars *vars)
 {
 	if (vars == NULL)
 		return (0);
-	mlx_destroy_window(vars->mlx, vars->win);
-	while (vars->max_y > 0)
-		free(vars->maps[vars->max_y--]);
+	if (vars->maps != NULL)
+		free_map(vars, -1);
+	if (vars->mlx != NULL && vars->win != NULL)
+		mlx_destroy_window(vars->mlx, vars->win);
 	exit(0);
 	return (0);
 }
@@ -55,7 +56,7 @@ void	*ft_realloc(void *ptr, size_t size)
 	return (new);
 }
 
-int	free_map(t_vars *vars, int fd)
+unsigned char	free_map(t_vars *vars, int fd)
 {
 	unsigned int	i;
 

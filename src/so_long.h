@@ -6,7 +6,7 @@
 /*   By: ml <ml@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 21:10:32 by ml                #+#    #+#             */
-/*   Updated: 2024/02/12 00:54:34 by ml               ###   ########.fr       */
+/*   Updated: 2024/02/12 01:57:18 by ml               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,16 +93,17 @@ typedef struct s_maploader {
 
 typedef struct s_map_check {
 	unsigned char	exit_found;
-	unsigned int	collectibles_found;
+	unsigned int	collectible;
 	unsigned char	**visited;
 }	t_map_check;
 
 /* MAP */
 char			load_map(t_vars *va, t_maploader *map, char *map_file);
-int				free_map(t_vars *vars, int fd);
-int				map_add_player(t_vars *vars, char *player_c, unsigned int x);
-int				map_add_exit(t_vars *vars, char *exit_c, unsigned int x);
-unsigned char	check_map_accessibility(t_vars *vars);
+unsigned char	free_map(t_vars *vars, int fd);
+unsigned char	map_add_player(t_vars *vars, char *player_c, unsigned int x);
+unsigned char	map_add_exit(t_vars *vars, char *exit_c, unsigned int x);
+unsigned char	map_check_accessibility(t_vars *vars);
+unsigned char	map_check_closed(t_vars *vars);
 
 /* TILE */
 void			init_tile(t_vars *var);
