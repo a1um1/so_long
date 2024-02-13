@@ -27,7 +27,7 @@ libmlx.a:
 	mv lib/mlx/libmlx.a libmlx.a
 
 ${NAME}: libftprintf.a libmlx.a ${OBJ}
-	${CC} ${CFLAGS} -lm -L. -lmlx -lftprintf -framework OpenGL -framework AppKit ${OBJ} -o ${NAME}
+	${CC} ${CFLAGS} -lXext -lX11 -lm -lz ${OBJ} -o ${NAME} -L. -lmlx -lftprintf
 
 clean: 
 	rm -f ${OBJ}

@@ -22,7 +22,9 @@
 		}
 	},
 	"files.associations": {
-		"*.ber": "markdown"
+		"*.ber": "markdown",
+		"unistd.h": "c",
+		"stdlib.h": "c"
 	},
 	"codam-norminette-3.command": "python3 -m norminette",
 	"[markdown]": {

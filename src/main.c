@@ -16,6 +16,7 @@ int	key_handle(int keycode, t_vars *vars)
 {
 	if (vars == NULL)
 		return (0);
+	ft_printf("Pressed %d\n", keycode);
 	if (keycode == KEY_W || keycode == KEY_A
 		|| keycode == KEY_S || keycode == KEY_D)
 		if (player_move(vars, keycode,

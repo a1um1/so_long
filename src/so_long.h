@@ -45,11 +45,11 @@ typedef struct s_chatacter {
 }	t_character;
 
 typedef enum keycode {
-	KEY_W = 13,
-	KEY_A = 0,
-	KEY_S = 1,
-	KEY_D = 2,
-	KEY_ESC = 53
+	KEY_W = 119,
+	KEY_A = 97,
+	KEY_S = 115,
+	KEY_D = 100,
+	KEY_ESC = 96
 }	t_keycode;
 
 typedef enum e_tile
