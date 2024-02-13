@@ -27,7 +27,7 @@ libmlx.a:
 	mv lib/mlx/libmlx.a libmlx.a
 
 ${NAME}: libftprintf.a libmlx.a ${OBJ}
-	${CC} ${CFLAGS} -lXext -lX11 -lm -lz ${OBJ} -o ${NAME} -L. -lmlx -lftprintf
+	${CC} ${CFLAGS} ${OBJ} -o ${NAME} -L. -lmlx -lftprintf -lXext -lX11 -lm -lz
 
 clean: 
 	rm -f ${OBJ}
