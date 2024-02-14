@@ -6,7 +6,7 @@
 /*   By: ml <ml@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 21:13:24 by ml                #+#    #+#             */
-/*   Updated: 2024/02/15 01:49:23 by ml               ###   ########.fr       */
+/*   Updated: 2024/02/15 02:02:33 by ml               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,15 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 		|| keydata.action != MLX_PRESS)
 		return ;
 	if (keydata.key == MLX_KEY_ESCAPE)
-		mlx_close_window(va->mlx);
+		exit_app(va, 0, -1);
 	else if (keydata.key == MLX_KEY_W)
-		player_move(va, MLX_KEY_UP,
-			va->chac_pos[0], va->chac_pos[1]);
+		player_move(va, MLX_KEY_UP);
 	else if (keydata.key == MLX_KEY_S)
-		player_move(va, MLX_KEY_DOWN,
-			va->chac_pos[0], va->chac_pos[1]);
+		player_move(va, MLX_KEY_DOWN);
 	else if (keydata.key == MLX_KEY_A)
-		player_move(va, MLX_KEY_LEFT,
-			va->chac_pos[0], va->chac_pos[1]);
+		player_move(va, MLX_KEY_LEFT);
 	else if (keydata.key == MLX_KEY_D)
-		player_move(va, MLX_KEY_RIGHT,
-			va->chac_pos[0], va->chac_pos[1]);
+		player_move(va, MLX_KEY_RIGHT);
 }
 
 int	main(int argc, char **argv)

@@ -6,7 +6,7 @@
 /*   By: ml <ml@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 21:10:32 by ml                #+#    #+#             */
-/*   Updated: 2024/02/15 01:39:28 by ml               ###   ########.fr       */
+/*   Updated: 2024/02/15 01:55:16 by ml               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef enum e_tile
 
 typedef struct s_vars {
 	mlx_t			*mlx;
-	unsigned int	chac_pos[2];
+	t_character		player;
 	mlx_image_t		*tile[5];
 	t_tile			**maps;
 	unsigned int	max_x;
@@ -85,8 +85,7 @@ void				draw_tileat(t_vars *vars, t_tile tile,
 						unsigned int x, unsigned int y);
 
 /* PLAYER */
-int					player_move(t_vars *vars, enum keys key,
-						unsigned int x, unsigned int y);
+int					player_move(t_vars *vars, enum keys key);
 
 /* UTILS */
 int					exit_app(t_vars *vars, int exit_code, int fd);

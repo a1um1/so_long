@@ -6,7 +6,7 @@
 /*   By: ml <ml@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 00:52:21 by ml                #+#    #+#             */
-/*   Updated: 2024/02/12 02:08:31 by ml               ###   ########.fr       */
+/*   Updated: 2024/02/15 01:55:45 by ml               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ unsigned char	map_check_accessibility(t_vars *vars)
 		ft_memset(check.visited[i++], 0, vars->max_x);
 	check.collectible = 0;
 	check.exit_found = 0;
-	flood_fill(vars, &check, vars->chac_pos[0], vars->chac_pos[1]);
+	flood_fill(vars, &check, vars->player.x, vars->player.y);
 	free_map_chk(&check, vars->max_y);
 	return (check.exit_found && check.collectible == vars->max_collectible);
 }

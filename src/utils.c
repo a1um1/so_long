@@ -6,7 +6,7 @@
 /*   By: ml <ml@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 21:13:33 by ml                #+#    #+#             */
-/*   Updated: 2024/02/15 01:40:29 by ml               ###   ########.fr       */
+/*   Updated: 2024/02/15 01:57:52 by ml               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	exit_app(t_vars *vars, int exit_code, int fd)
 {
-	if (exit_code != 0 && vars != NULL)
-		ft_printf("Error\n");
 	if (vars == NULL)
 	{
 		ft_printf("Error\n");
 		exit(exit_code);
 		return (exit_code);
 	}
+	if (exit_code != 0 && vars != NULL)
+		ft_printf("Error\n");
 	if (vars->maps != NULL)
 		free_map(vars, fd);
 	if (vars->mlx != NULL)
@@ -53,8 +53,8 @@ void	init_vars(t_vars *vars, t_maploader	*map)
 	vars->max_collectible = 0;
 	vars->collectible = 0;
 	vars->moves = 0;
-	vars->chac_pos[0] = 0;
-	vars->chac_pos[1] = 0;
+	vars->player.x = 0;
+	vars->player.y = 0;
 	map->player_c = 0;
 	map->exit_c = 0;
 	vars->tile[WALL] = NULL;

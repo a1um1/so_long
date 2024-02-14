@@ -5,10 +5,10 @@
 			"name": "(lldb) Launch",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}/so_long",
-			"args": ["${workspaceFolder}/map/basic.ber"],
+			"program": "./so_long",
+			"args": ["map/basic.ber"],
 			"stopAtEntry": false,
-			"cwd": "${fileDirname}",
+			"cwd": "${workspaceFolder}",
 			"environment": [],
 			"externalConsole": false,
 			"MIMode": "lldb"
