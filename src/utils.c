@@ -6,22 +6,44 @@
 /*   By: ml <ml@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 21:13:33 by ml                #+#    #+#             */
-/*   Updated: 2024/02/12 02:01:12 by ml               ###   ########.fr       */
+/*   Updated: 2024/02/15 01:40:29 by ml               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	exit_app(t_vars *vars)
+int	exit_app(t_vars *vars, int exit_code, int fd)
 {
+	if (exit_code != 0 && vars != NULL)
+		ft_printf("Error\n");
 	if (vars == NULL)
-		return (0);
+	{
+		ft_printf("Error\n");
+		exit(exit_code);
+		return (exit_code);
+	}
 	if (vars->maps != NULL)
-		free_map(vars, -1);
-	if (vars->mlx != NULL && vars->win != NULL)
-		mlx_destroy_window(vars->mlx, vars->win);
-	exit(0);
-	return (0);
+		free_map(vars, fd);
+	if (vars->mlx != NULL)
+		mlx_close_window(vars->mlx);
+	if (vars->tile[WALL] != NULL)
+		mlx_delete_image(vars->mlx, vars->tile[WALL]);
+	if (vars->tile[EMPTY] != NULL)
+		mlx_delete_image(vars->mlx, vars->tile[EMPTY]);
+	if (vars->tile[PLAYER] != NULL)
+		mlx_delete_image(vars->mlx, vars->tile[PLAYER]);
+	if (vars->tile[EXIT] != NULL)
+		mlx_delete_image(vars->mlx, vars->tile[EXIT]);
+	if (vars->tile[COLLECTIBLE] != NULL)
+		mlx_delete_image(vars->mlx, vars->tile[COLLECTIBLE]);
+	mlx_close_window(vars->mlx);
+	exit(exit_code);
+	return (exit_code);
+}
+
+void	close_hook(void *vars)
+{
+	exit_app(vars, 0, -1);
 }
 
 void	init_vars(t_vars *vars, t_maploader	*map)
@@ -35,6 +57,11 @@ void	init_vars(t_vars *vars, t_maploader	*map)
 	vars->chac_pos[1] = 0;
 	map->player_c = 0;
 	map->exit_c = 0;
+	vars->tile[WALL] = NULL;
+	vars->tile[EMPTY] = NULL;
+	vars->tile[PLAYER] = NULL;
+	vars->tile[EXIT] = NULL;
+	vars->tile[COLLECTIBLE] = NULL;
 	map->i = 0;
 }
 

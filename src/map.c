@@ -6,7 +6,7 @@
 /*   By: ml <ml@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 21:14:33 by ml                #+#    #+#             */
-/*   Updated: 2024/02/12 01:51:53 by ml               ###   ########.fr       */
+/*   Updated: 2024/02/15 01:45:40 by ml               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	check_line(t_vars *vars, char *line, char *player_c, char *exit_c)
 
 	i = 0;
 	while (line[i] != 0 && line[i] != '\n')
-		if (strchr("01CEP", line[i++]) == NULL)
+		if (ft_strchr("01CEP", line[i++]) == NULL)
 			return (1);
 	if (vars->max_x != 0 && vars->max_x != i)
 		return (1);
@@ -77,18 +77,18 @@ char	load_map(t_vars *va, t_maploader *map, char *map_file)
 	while (map->line != NULL)
 	{
 		if (check_line(va, map->line, &map->player_c, &map->exit_c) == 1)
-			return (free_map(va, map->fd));
+			return (exit_app(va, 1, map->fd));
 		free(map->line);
 		va->maps = ft_realloc(va->maps, sizeof(int *) * (++va->max_y + 1));
 		if (va->maps == NULL)
-			return (free_map(va, map->fd));
+			return (exit_app(va, 1, map->fd));
 		va->maps[va->max_y] = NULL;
 		map->line = get_next_line(map->fd);
 	}
 	if (check_map(va, map->player_c, map->exit_c) == 1)
-		return (free_map(va, map->fd));
+		return (exit_app(va, 1, map->fd));
 	if (map_check_accessibility(va) == 0 || map_check_closed(va))
-		return (free_map(va, map->fd));
+		return (exit_app(va, 1, map->fd));
 	close(map->fd);
 	return (0);
 }

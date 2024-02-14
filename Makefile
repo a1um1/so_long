@@ -9,7 +9,7 @@ SRCS	=	${addprefix ${SRC_DIR}, ${SRC}}
 OBJ		=	${SRCS:.c=.o}
 NAME	=	so_long
 CC		=	clang
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror -g
 
 all: ${NAME}
 
@@ -23,16 +23,17 @@ libftprintf.a:
 	mv lib/ft_printf/libftprintf.a libftprintf.a
 
 libmlx.a: 
-	make -C lib/mlx
-	mv lib/mlx/libmlx.a libmlx.a
+	cmake -S lib/mlx -B mlxbuild  -DDEBUG=1
+	cmake --build mlxbuild -j4
+	mv mlxbuild/libmlx42.a libmlx.a
 
 ${NAME}: libftprintf.a libmlx.a ${OBJ}
-	${CC} ${CFLAGS} ${OBJ} -o ${NAME} -L. -lmlx -lftprintf -lXext -lX11 -lm -lz
+	${CC} -L. -lmlx -lftprintf -L"/opt/homebrew/Cellar/glfw/3.3.9/lib/" -lglfw ${CFLAGS} ${OBJ} -o ${NAME}
 
 clean: 
 	rm -f ${OBJ}
+	rm -rf mlxbuild
 	make -C lib/ft_printf clean
-	make -C lib/mlx clean
 
 fclean: clean
 	rm -f libftprintf.a

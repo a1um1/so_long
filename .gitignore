@@ -4,3 +4,4 @@
 *.tgz
 so_long
 *.o
+build/
