@@ -6,7 +6,7 @@
 /*   By: ml <ml@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 21:13:24 by ml                #+#    #+#             */
-/*   Updated: 2024/02/15 02:02:33 by ml               ###   ########.fr       */
+/*   Updated: 2024/02/15 02:26:10 by ml               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,11 @@ int	main(int argc, char **argv)
 	t_maploader		map;
 
 	init_vars(&vars, &map);
-	if (argc != 2 || load_map(&vars, &map, argv[1]) != 0)
+	if (argc != 2)
+		return (exit_app(&vars, 1, -1));
+	if (ft_strncmp(ft_strrchr(argv[1], '.'), ".ber", 4) != 0)
+		return (exit_app(&vars, 1, -1));
+	if (load_map(&vars, &map, argv[1]) != 0)
 		return (exit_app(&vars, 1, -1));
 	vars.mlx = mlx_init(vars.max_x * TILE_SIZE, vars.max_y * TILE_SIZE,
 			"so_long", false);

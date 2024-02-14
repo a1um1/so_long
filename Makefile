@@ -9,7 +9,7 @@ SRCS	=	${addprefix ${SRC_DIR}, ${SRC}}
 OBJ		=	${SRCS:.c=.o}
 NAME	=	so_long
 CC		=	clang
-CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror
 
 all: ${NAME}
 
@@ -23,7 +23,7 @@ libftprintf.a:
 	mv lib/ft_printf/libftprintf.a libftprintf.a
 
 libmlx.a: 
-	cmake -S lib/mlx -B mlxbuild  -DDEBUG=1
+	cmake -S lib/mlx -B mlxbuild -DDEBUG=1
 	cmake --build mlxbuild -j4
 	mv mlxbuild/libmlx42.a libmlx.a
 
