@@ -24,7 +24,8 @@
 	"files.associations": {
 		"*.ber": "markdown",
 		"unistd.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"so_long.h": "c"
 	},
 	"codam-norminette-3.command": "python3 -m norminette",
 	"[markdown]": {

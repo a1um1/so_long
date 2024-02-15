@@ -36,8 +36,6 @@ int	exit_app(t_vars *vars, int exit_code, int fd)
 		mlx_delete_image(vars->mlx, vars->tile[EXIT]);
 	if (vars->tile[COLLECTIBLE] != NULL)
 		mlx_delete_image(vars->mlx, vars->tile[COLLECTIBLE]);
-	if (vars->mlx != NULL)
-		mlx_close_window(vars->mlx);
 	exit(exit_code);
 	return (exit_code);
 }
@@ -64,24 +62,29 @@ void	init_vars(t_vars *vars, t_maploader	*map)
 	vars->mlx = NULL;
 	vars->maps = NULL;
 	map->i = 0;
+	map->exit_c = 0;
+	map->player_c = 0;
 }
 
 void	*ft_realloc(void *ptr, size_t size)
 {
-	void	*new;
+	char	*new;
 
-	new = malloc(size * sizeof(int *));
+	if (ptr == NULL)
+		new = malloc(size);
+	if (size == 0 && ptr)
+	{
+		ft_memdel(ptr);
+		return (ptr);
+	}
+	new = (char *) ft_calloc(size, sizeof(char));
 	if (new == NULL)
-	{
-		free(ptr);
 		return (NULL);
-	}
 	if (ptr != NULL)
-	{
 		ft_memcpy(new, ptr, size);
-		free(ptr);
-	}
-	return (new);
+	ft_memdel(&ptr);
+	ptr = new;
+	return (ptr);
 }
 
 unsigned char	free_map(t_vars *vars, int fd)
@@ -89,14 +92,14 @@ unsigned char	free_map(t_vars *vars, int fd)
 	unsigned int	i;
 
 	i = 0;
-	while (i < vars->max_y)
+	while (i <= vars->max_y)
 	{
 		free(vars->maps[i]);
 		vars->maps[i++] = NULL;
 	}
 	free(vars->maps);
+	vars->maps = NULL;
 	if (fd != -1)
 		close(fd);
-	vars->maps = NULL;
 	return (1);
 }

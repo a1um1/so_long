@@ -16,8 +16,8 @@ void	draw_tileat(t_vars *vars, t_tile tile, unsigned int x, unsigned int y)
 {
 	if (vars == NULL)
 		return ;
-	if (mlx_image_to_window(vars->mlx, 
-			vars->tile[tile], x * vars->tile[tile]->width, 
+	if (mlx_image_to_window(vars->mlx,
+			vars->tile[tile], x * vars->tile[tile]->width,
 			y * vars->tile[tile]->height) == -1)
 		exit_app(vars, 1, -1);
 }

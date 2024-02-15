@@ -68,10 +68,9 @@ char	load_map(t_vars *va, t_maploader *map, char *map_file)
 {
 	if (va == NULL || map_file == NULL)
 		return (1);
-	va->maps = malloc(sizeof(int *) * 1);
+	va->maps = ft_realloc(NULL, sizeof(int *));
 	if (va->maps == NULL)
 		return (1);
-	va->maps[0] = NULL;
 	map->fd = open(map_file, O_RDONLY);
 	map->line = get_next_line(map->fd);
 	while (map->line != NULL)

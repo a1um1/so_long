@@ -28,7 +28,8 @@
 # define TILE_COLLECTIBLE	"assets/collectible.xpm42"
 # define IS_PRESS			mlx_is_key_down
 
-typedef struct s_chatacter {
+typedef struct s_chatacter
+{
 	int		x;
 	int		y;
 }	t_character;
@@ -42,7 +43,8 @@ typedef enum e_tile
 	COLLECTIBLE
 }	t_tile;
 
-typedef struct s_vars {
+typedef struct s_vars
+{
 	mlx_t			*mlx;
 	t_character		player;
 	mlx_image_t		*tile[5];
@@ -54,7 +56,8 @@ typedef struct s_vars {
 	unsigned int	moves;
 }					t_vars;
 
-typedef struct s_maploader {
+typedef struct s_maploader
+{
 	char				*map;
 	int					fd;
 	unsigned int		i;
@@ -64,7 +67,8 @@ typedef struct s_maploader {
 	char				count[2];
 }						t_maploader;
 
-typedef struct s_map_check {
+typedef struct s_map_check
+{
 	unsigned char	exit_found;
 	unsigned int	collectible;
 	unsigned char	**visited;
@@ -92,5 +96,6 @@ int					exit_app(t_vars *vars, int exit_code, int fd);
 void				close_hook(void *vars);
 void				init_vars(t_vars *vars, t_maploader	*map);
 void				*ft_realloc(void *ptr, size_t size);
+void				ft_memdel(void **ap);
 
 #endif

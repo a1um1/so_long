@@ -63,6 +63,8 @@ int	main(int argc, char **argv)
 	init_vars(&vars, &map);
 	if (argc != 2)
 		return (exit_app(&vars, 1, -1));
+	if (ft_strrchr(argv[1], '.') == NULL)
+		return (exit_app(&vars, 1, -1));
 	if (ft_strncmp(ft_strrchr(argv[1], '.'), ".ber", 4) != 0)
 		return (exit_app(&vars, 1, -1));
 	if (load_map(&vars, &map, argv[1]) != 0)
