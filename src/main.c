@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ml <ml@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: tlakchai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/11 21:13:24 by ml                #+#    #+#             */
-/*   Updated: 2024/02/15 02:26:10 by ml               ###   ########.fr       */
+/*   Created: 2024/02/18 23:10:57 by tlakchai          #+#    #+#             */
+/*   Updated: 2024/02/18 23:11:18 by tlakchai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
 void	draw_map(t_vars *vars, unsigned int x, unsigned int y)
 {

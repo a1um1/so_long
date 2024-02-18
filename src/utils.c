@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ml <ml@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: tlakchai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/11 21:13:33 by ml                #+#    #+#             */
-/*   Updated: 2024/02/18 22:31:17 by ml               ###   ########.fr       */
+/*   Created: 2024/02/18 23:12:46 by tlakchai          #+#    #+#             */
+/*   Updated: 2024/02/18 23:14:54 by tlakchai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
-#include <stddef.h>
+#include "../include/so_long.h"
 
 int	exit_app(t_vars *vars, int exit_code, int fd)
 {

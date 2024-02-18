@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ml <ml@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: tlakchai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 00:00:50 by ml                #+#    #+#             */
-/*   Updated: 2024/02/15 01:55:15 by ml               ###   ########.fr       */
+/*   Created: 2024/02/18 23:12:10 by tlakchai          #+#    #+#             */
+/*   Updated: 2024/02/18 23:12:11 by tlakchai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
 unsigned char	map_add_player(t_vars *vars, char *player_c, unsigned int x)
 {

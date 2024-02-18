@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tile.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ml <ml@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: tlakchai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/11 21:13:52 by ml                #+#    #+#             */
-/*   Updated: 2024/02/15 01:46:22 by ml               ###   ########.fr       */
+/*   Created: 2024/02/18 23:12:37 by tlakchai          #+#    #+#             */
+/*   Updated: 2024/02/18 23:12:59 by tlakchai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
 void	draw_tileat(t_vars *vars, t_tile tile, unsigned int x, unsigned int y)
 {

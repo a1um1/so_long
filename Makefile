@@ -9,7 +9,7 @@ SRCS	=	${addprefix ${SRC_DIR}, ${SRC}}
 OBJ		=	${SRCS:.c=.o}
 NAME	=	so_long
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -g
+CFLAGS	=	-Wall -Wextra -Werror -I include
 
 all: ${NAME}
 
@@ -42,7 +42,7 @@ fclean: clean
 	rm -f ${NAME}
 
 norminette:
-	python3 -m norminette src/*.c src/*.h
+	python3 -m norminette src/*.c include/*.h
 	python3 -m norminette lib/get_next_line/*.c lib/get_next_line/*.h
 	python3 -m norminette lib/ft_printf/*.c lib/ft_printf/*.h
 	python3 -m norminette lib/ft_printf/libft/**/*.c lib/ft_printf/libft/**/*.h

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ml <ml@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: tlakchai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/11 21:17:02 by ml                #+#    #+#             */
-/*   Updated: 2024/02/15 02:00:44 by ml               ###   ########.fr       */
+/*   Created: 2024/02/18 23:12:31 by tlakchai          #+#    #+#             */
+/*   Updated: 2024/02/18 23:13:01 by tlakchai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
 int	player_check(t_vars *vars, enum keys key, unsigned int x, unsigned int y)
 {

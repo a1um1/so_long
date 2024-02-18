@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ml <ml@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: tlakchai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/11 21:14:33 by ml                #+#    #+#             */
-/*   Updated: 2024/02/18 22:31:51 by ml               ###   ########.fr       */
+/*   Created: 2024/02/18 23:12:25 by tlakchai          #+#    #+#             */
+/*   Updated: 2024/02/18 23:12:26 by tlakchai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
 int	fill_map_line(t_vars *vars, char *line, char *player_c, char *exit_c)
 {

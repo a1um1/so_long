@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ml <ml@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: tlakchai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 00:52:21 by ml                #+#    #+#             */
-/*   Updated: 2024/02/15 01:55:45 by ml               ###   ########.fr       */
+/*   Created: 2024/02/18 23:12:04 by tlakchai          #+#    #+#             */
+/*   Updated: 2024/02/18 23:12:05 by tlakchai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
 unsigned int	free_map_chk(t_map_check *chk, unsigned int max)
 {

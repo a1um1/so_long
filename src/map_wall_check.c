@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_wall_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ml <ml@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: tlakchai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 01:21:43 by ml                #+#    #+#             */
-/*   Updated: 2024/02/12 01:35:26 by ml               ###   ########.fr       */
+/*   Created: 2024/02/18 23:12:21 by tlakchai          #+#    #+#             */
+/*   Updated: 2024/02/18 23:12:22 by tlakchai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
 unsigned char	map_check_closed(t_vars *vars)
 {
