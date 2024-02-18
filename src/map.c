@@ -6,7 +6,7 @@
 /*   By: ml <ml@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 21:14:33 by ml                #+#    #+#             */
-/*   Updated: 2024/02/15 01:45:40 by ml               ###   ########.fr       */
+/*   Updated: 2024/02/18 22:31:51 by ml               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	load_map(t_vars *va, t_maploader *map, char *map_file)
 {
 	if (va == NULL || map_file == NULL)
 		return (1);
-	va->maps = ft_realloc(NULL, sizeof(int *));
+	va->maps = ft_calloc(sizeof(int *), 1);
 	if (va->maps == NULL)
 		return (1);
 	map->fd = open(map_file, O_RDONLY);

@@ -1,7 +1,0 @@
-/home/tlakchai/42/so_long/mlxbuild/CMakeFiles/mlx42.dir
-/home/tlakchai/42/so_long/mlxbuild/CMakeFiles/edit_cache.dir
-/home/tlakchai/42/so_long/mlxbuild/CMakeFiles/rebuild_cache.dir
-/home/tlakchai/42/so_long/mlxbuild/CMakeFiles/list_install_components.dir
-/home/tlakchai/42/so_long/mlxbuild/CMakeFiles/install.dir
-/home/tlakchai/42/so_long/mlxbuild/CMakeFiles/install/local.dir
-/home/tlakchai/42/so_long/mlxbuild/CMakeFiles/install/strip.dir

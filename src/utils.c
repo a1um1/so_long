@@ -6,11 +6,12 @@
 /*   By: ml <ml@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 21:13:33 by ml                #+#    #+#             */
-/*   Updated: 2024/02/15 02:17:21 by ml               ###   ########.fr       */
+/*   Updated: 2024/02/18 22:31:17 by ml               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include <stddef.h>
 
 int	exit_app(t_vars *vars, int exit_code, int fd)
 {
@@ -70,11 +71,10 @@ void	*ft_realloc(void *ptr, size_t size)
 {
 	char	*new;
 
-	if (ptr == NULL)
-		new = malloc(size);
 	if (size == 0 && ptr)
 	{
-		ft_memdel(ptr);
+		free(ptr);
+		ptr = NULL;
 		return (ptr);
 	}
 	new = (char *) ft_calloc(size, sizeof(char));
@@ -82,20 +82,22 @@ void	*ft_realloc(void *ptr, size_t size)
 		return (NULL);
 	if (ptr != NULL)
 		ft_memcpy(new, ptr, size);
-	ft_memdel(&ptr);
+	free(ptr);
 	ptr = new;
 	return (ptr);
 }
 
 unsigned char	free_map(t_vars *vars, int fd)
 {
-	unsigned int	i;
+	size_t	i;
 
 	i = 0;
-	while (i <= vars->max_y)
+	while (i < vars->max_y)
 	{
-		free(vars->maps[i]);
-		vars->maps[i++] = NULL;
+		if (vars->maps[i] != NULL)
+			free(vars->maps[i]);
+		vars->maps[i] = NULL;
+		i++;
 	}
 	free(vars->maps);
 	vars->maps = NULL;

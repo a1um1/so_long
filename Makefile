@@ -1,6 +1,6 @@
 NAME = so_long
 
-SRC =	src/main.c src/map.c src/player.c src/tile.c src/utils.c src/utils_extra.c\
+SRC =	src/main.c src/map.c src/player.c src/tile.c src/utils.c\
 		src/map_utils.c src/map_check.c src/map_wall_check.c\
 		lib/get_next_line/get_next_line.c lib/get_next_line/get_next_line_utils.c
 
@@ -9,7 +9,7 @@ SRCS	=	${addprefix ${SRC_DIR}, ${SRC}}
 OBJ		=	${SRCS:.c=.o}
 NAME	=	so_long
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror -g
 
 all: ${NAME}
 
@@ -28,7 +28,8 @@ libmlx.a:
 	mv mlxbuild/libmlx42.a libmlx.a
 
 ${NAME}: libftprintf.a libmlx.a ${OBJ}
-	${CC} ${CFLAGS} ${OBJ} libmlx.a -o ${NAME} -L. -lftprintf -lglfw
+	${CC} ${CFLAGS} ${OBJ} libmlx.a -o ${NAME} -L. -lftprintf -lglfw -L"/opt/homebrew/Cellar/glfw/3.3.9/lib/"
+#	${CC} ${CFLAGS} ${OBJ} libmlx.a -o ${NAME} -L. -lftprintf -lglfw
 
 clean: 
 	rm -f ${OBJ}
