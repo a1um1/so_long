@@ -47,4 +47,4 @@ norminette:
 	python3 -m norminette lib/ft_printf/*.c lib/ft_printf/*.h
 	python3 -m norminette lib/ft_printf/libft/**/*.c lib/ft_printf/libft/**/*.h
 
-re: clean all
+re: fclean all
